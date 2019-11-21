@@ -1,0 +1,246 @@
+<!--
+      @author wangzilong
+      @date 2019/11/15 14:22
+-->
+<ion-view >
+    <!--<ion-header-bar>
+        <div class="viewBackType">
+            <div class="viewBackTypeList">
+                未解决
+            </div>
+            <div class="viewBackTypeList">
+                已解决
+            </div>
+            <div class="viewBackTypeList">
+                待审核
+            </div>
+        </div>
+    </ion-header-bar>-->
+    <ion-nav-buttons side="right">
+        <button class="button" ng-click="openViewBack()">反馈问题</button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <div style="width: 70%;margin: .2rem auto;">
+            <input id="viewer"
+                   ng-model="viewbacksearch"
+                   type="text"
+                   placeholder="请输入你要查找的关键字"
+                   style="border-radius: 10px;height: 1.9rem;"
+                   ng-change="changeview()"
+            />
+
+        </div>
+    </ion-nav-title>
+    <ion-header-bar style="margin-top: 2.4rem;background: #fffffa;">
+        <div class="viewBackTypeList">
+            未解决
+        </div>
+        <div class="viewBackTypeList">
+            已解决
+        </div>
+        <div class="viewBackTypeList">
+            待审核
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div>
+            <div calss="viewBackContent" style="background: #fffffa;height: 1000px;margin-top: 3.3rem;">
+                <ion-refresher pulling-text="刷新..." on-refresh="doRefresh()"></ion-refresher>
+                <div class="viewBackList" ng-repeat="msg in WillSolveData track by $index" ng-show="show.WillSolve">
+                    <div class="viewBackListItem" ng-click="goitem(msg)">
+                        <div class="viewBackFlex">
+                            <div class="viewBackListItemTitle shengluehao">
+                                {{msg.title}}
+                            </div>
+                            <div class="viewBackListItemIcon shengluehao">
+                                <i class="icon ion-thumbsup"></i>支持
+                            </div>
+                        </div>
+
+                        <div class="viewBackListItemContent shengluehao">
+                            {{msg.content}}
+                        </div>
+                        <div class="viewBackListItemFooter shengluehao">
+                            <div class="viewBackListItemFooterName shengluehao">
+                                {{msg.user_name}}
+                            </div>
+                            <div class="viewBackListItemFooterTime shengluehao">
+                                {{msg.crtTimeStr}}
+                            </div>
+                            <div class="viewBackListItemFooterSupport shengluehao">
+                                <a>{{msg.user_count}}</a>个支持
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="viewBackList" ng-repeat="msg in AlreadySolveData track by $index" ng-show="show.AlreadySolve">
+                    <div class="viewBackListItem" ng-click="goitem(msg)">
+                    <div class="viewBackFlex">
+                        <div class="viewBackListItemTitle shengluehao">
+                            {{msg.title}}
+                        </div>
+                        <div class="viewBackListItemIcon shengluehao">
+                            <i class="icon ion-thumbsup"></i>支持
+                        </div>
+                    </div>
+
+                    <div class="viewBackListItemContent shengluehao">
+                        {{msg.content}}
+                    </div>
+                    <div class="viewBackListItemFooter shengluehao">
+                        <div class="viewBackListItemFooterName shengluehao">
+                            {{msg.user_name}}
+                        </div>
+                        <div class="viewBackListItemFooterTime shengluehao">
+                            {{msg.crtTimeStr}}
+                        </div>
+                        <div class="viewBackListItemFooterSupport shengluehao">
+                            <a>{{msg.user_count}}</a>个支持
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+                <div class="viewBackList" ng-repeat="msg in WillAuditData track by $index" ng-show="show.WillAudit">
+                    <div class="viewBackListItem" ng-click="goitem(msg)">
+                    <div class="viewBackFlex">
+                        <div class="viewBackListItemTitle shengluehao">
+                            {{msg.title}}
+                        </div>
+                        <div class="viewBackListItemIcon shengluehao">
+                            <i class="icon ion-thumbsup"></i>支持
+                        </div>
+                    </div>
+
+                    <div class="viewBackListItemContent shengluehao">
+                        {{msg.content}}
+                    </div>
+                    <div class="viewBackListItemFooter shengluehao">
+                        <div class="viewBackListItemFooterName shengluehao">
+                            {{msg.user_name}}
+                        </div>
+                        <div class="viewBackListItemFooterTime shengluehao">
+                            {{msg.crtTimeStr}}
+                        </div>
+                        <div class="viewBackListItemFooterSupport shengluehao">
+                            <a>{{msg.user_count}}</a>个支持
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </ion-content>
+</ion-view>
+
+<script id="add-view-back.html" type="text/ng-template">
+    <div style="width: 80%">
+        <ion-modal-view>
+            <ion-header-bar class="bar-positive">
+                <div class="buttons">
+                    <button class="button" ng-click="closeModal()">返回</button>
+                </div>
+                <h1 class="title">问题反馈</h1>
+            </ion-header-bar>
+            <ion-content class="activity-mgr-upload-modal">
+                <ion-item style="padding: 10px;">
+                    <div class="item-input" style="padding: 0 5px;">
+                        <label>反馈标题</label>
+                        <input placeholder="请输入标题,最长50字符" maxlength="50" style="margin-left: 50px;"
+                               ng-model="modalparams.title"/>
+                    </div>
+                </ion-item>
+                <ion-item style="padding: 10px;">
+                    <div class="item-input" style="padding: 0 5px;height: 200px;">
+                        <label style="position: absolute;top: 5px;">内容</label>
+                        <textarea placeholder="请输入内容,最长1000字符" maxlength="1000" style="margin-left: 80px;"
+                                  ng-model="modalparams.content"></textarea>
+                    </div>
+                </ion-item>
+                <ion-item style="padding: 10px;">
+                    <div class="item-input" style="padding: 0 5px;">
+                        <label>联系方式</label>
+                        <input placeholder="请输入联系方式(手机号、qq、邮箱)" maxlength="20" style="margin-left: 20px;"
+                               ng-model="modalparams.phone"/>
+                    </div>
+                </ion-item>
+                <ion-item style="padding: 10px;">
+                    <div class="item-input" style="padding: 0 5px; font-size: 8px">
+                        问题部分图片(选填，提供问题截图，小于10M)
+                    </div>
+                    <div>
+                        <input type="file" id="fileData" accept="image/*" class="file-input"/>
+                        <div id = "input_imgs"></div>
+                    </div>
+                </ion-item>
+                <ion-item>
+                    <div style="margin-bottom: .5rem;">
+                        问题评价
+                    </div>
+                    <div>
+                        <div class="list">
+                            <label class="item item-radio">
+                                <input type="radio" name="group" value="Vwell" checked="checked">
+                                <div class="radio-content">
+                                    <div class="item-content">
+                                        非常满意
+                                    </div>
+                                    <i class="radio-icon ion-checkmark"></i>
+                                </div>
+                            </label>
+
+                            <label class="item item-radio">
+                                <input type="radio" name="group" value="well">
+                                <div class="radio-content">
+                                    <div class="item-content">
+                                        满意
+                                    </div>
+                                    <i class="radio-icon ion-checkmark"></i>
+                                </div>
+                            </label>
+
+                            <label class="item item-radio">
+                                <input type="radio" name="group" value="dally">
+                                <div class="radio-content">
+                                    <div class="item-content">
+                                        一般
+                                    </div>
+                                    <i class="radio-icon ion-checkmark"></i>
+                                </div>
+                            </label>
+
+                            <label class="item item-radio">
+                                <input type="radio" name="group" value="bad">
+                                <div class="radio-content">
+                                    <div class="item-content">
+                                        不满意
+                                    </div>
+                                    <i class="radio-icon ion-checkmark"></i>
+                                </div>
+                            </label>
+
+                            <label class="item item-radio">
+                                <input type="radio" name="group" value="terrible" >
+                                <div class="radio-content">
+                                    <div class="item-content">
+                                        很不满意
+                                    </div>
+                                    <i class="radio-icon ion-checkmark"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </ion-item>
+                <ion-item style="padding: 5px;">
+                    <button class="button button-block button-positive" ng-click="addViewBack()" style="margin: 0;">提交
+                    </button>
+                </ion-item>
+
+            </ion-content>
+        </ion-modal-view>
+    </div>
+</script>

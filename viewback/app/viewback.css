@@ -1,0 +1,162 @@
+/**
+ * @author wangzilong
+ * @date 2019/11/16 11:04
+ */
+
+.viewBackContent {
+    margin-top: 3rem;
+    background: lightgrey;
+}
+.viewBackType {
+
+}
+.viewBackTypeList {
+    margin-top: .3rem;
+    width: 32%;
+    display: inline-block;
+    text-align: center;
+    padding-bottom: .2rem;
+}
+.viewBackTypeListBottom {
+    border-bottom: solid 2px #00aced ;
+}
+.viewBackListItem {
+    width: 90%;
+    margin: .8rem auto;
+    background: #fff;
+    border-radius: 20px;
+    border:solid #00aced .3px;
+    border-bottom: #00aced solid 1px;
+    border-top: #00aced solid 1px;
+}
+/*列表部分*/
+.viewBackList {
+}
+.viewBackFlex {
+    display: flex;
+
+}
+.viewBackListItemTitle {
+
+    flex: 1;
+    width: 70%;
+    margin: .9rem auto;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: solid #0d1721 .1px;
+}
+.viewBackListItemIcon {
+    flex:.25;
+    margin: .9rem auto;
+    text-align: center;
+    font-weight: bold;
+    color: #00aced;
+}
+.viewBackListItemIcon i{
+    margin-right: .2rem;
+}
+
+.viewBackListItemContent {
+    margin: .6rem auto;
+    text-align: left;
+    width: 85%;
+
+}
+.viewBackListItemFooter {
+    width: 85%;
+    margin: 0 auto;
+    text-align: left;
+}
+.viewBackListItemFooterName {
+    margin: .4rem .4rem;
+    display: inline-block;
+
+}
+.viewBackListItemFooterTime {
+    margin: .4rem .4rem;
+    display: inline-block;
+
+}
+.viewBackListItemFooterSupport {
+
+    margin: .4rem .4rem;
+    display: inline-block;
+}
+.viewBackListItemFooterSupport a {
+    color: red;
+}
+.shengluehao {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+/**
+ * 反馈详情页面样式
+ */
+.view_back_item_title {
+    width: 80%;
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 3rem;
+}
+.view_back_item_massage {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 3rem;
+}
+.view_back_item_massage_sig {
+    display: inline-block;
+    background: #00aced;
+}
+.view_back_item_massage_name{
+    display: inline-block;
+}
+.view_back_item_massage_title{
+    display: inline-block;
+}
+.view_back_item_content {
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 3rem;
+}
+.view_back_item_support {
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 3rem;
+    text-align: center;
+    border: solid #0c60ee .5px;
+    border-radius: 10px;
+
+}
+.view_back_item_support  div{
+    margin-bottom: 0;
+    vertical-align: bottom;
+}
+.view_back_item_support  i{
+    color: #00aced;
+    margin-right: .4rem;
+}
+
+/**
+ * 反馈详情模态窗口样式
+ */
+
+.viewBackManage {
+    float: right;
+    right: 0px !important;
+    margin-top: 45px;
+    width: 20%;
+}
+.viewBackManage .item label{
+    font-size: 4px !important;
+}
+.viewBackManage .item {
+    padding: 7px !important;
+    color: #fff !important;
+    background-color: #00aced !important;
+    border-radius: 4px !important;
+    text-align: center !important;
+}

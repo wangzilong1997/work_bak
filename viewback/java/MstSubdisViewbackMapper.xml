@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ztesoft.cq.community.mapper.MstSubdisViewbackMapper">
+    <resultMap id="BaseResultMap" type="com.ztesoft.cq.community.model.MstSubdisViewback">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <result column="TITLE" jdbcType="VARCHAR" property="title"/>
+        <result column="CONTENT" jdbcType="VARCHAR" property="content"/>
+        <result column="CRT_TIME" jdbcType="DATE" property="crtTime"/>
+        <result column="CRT_USER" jdbcType="DECIMAL" property="crtUser"/>
+        <result column="BLOGID" jdbcType="DECIMAL" property="blogid"/>
+        <result column="CRT_TIME_STR" jdbcType="VARCHAR" property="crtTimeStr"/>
+        <result column="USERID" jdbcType="VARCHAR" property="userid"/>
+        <result column="USER_NAME" jdbcType="VARCHAR" property="user_name"/>
+        <result column="USER_COUNT" jdbcType="VARCHAR" property="user_count"/>
+        <result column="IS_SOLVE" jdbcType="VARCHAR" property="is_solve"/>
+        <result column="IS_AUDIT" jdbcType="VARCHAR" property="is_audit"/>
+
+    </resultMap>
+    <!--查询是否具有权限-->
+    <select id="power" parameterType="map" resultMap="BaseResultMap">
+        select * from VIEW_BACK where USERID =#{login_user_id}
+    </select>
+    <!-- 查询所有意见反馈的消息 -->
+    <select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+    select a.*,to_char(a.dateline, 'YYYY-MM-DD HH24:MI') crt_time_str ,b.user_name
+    from BLOG a,WID_HX_USER b,VIEW_BACK c
+    where a.userid = b.user_id and a.state = '0'
+    order by dateline desc
+    </select>
+    <!-- 查询部分意见反馈的消息 -->
+    <select id="querySome" parameterType="map" resultMap="BaseResultMap">
+    select a.*,to_char(a.dateline, 'YYYY-MM-DD HH24:MI') crt_time_str ,b.user_name
+    from BLOG a,WID_HX_USER b
+    where a.userid = b.user_id and a.is_audit = '1'
+    order by dateline desc
+    </select>
+
+    <insert id="addViewBackInfo" parameterType="com.ztesoft.cq.community.model.MstSubdisViewback">
+        <selectKey keyProperty="blogid" resultType="long" order="BEFORE">
+            select SEQ_BLOG.nextval from dual
+        </selectKey>
+        insert into blog
+        (
+        BLOGID,
+        TITLE,
+        CONTENT,
+        DATELINE,
+        USERID,
+        MOBILE
+        )
+        values
+        (
+        #{blogid},
+        #{title},
+        #{content},
+        sysdate,
+        #{crtUser},
+        #{contact}
+        )
+    </insert>
+    <update id="passAudit" parameterType="map">
+        update blog set is_audit='1' where BLOGID =#{blogid,jdbcType = VARCHAR}
+    </update>
+    <update id="passOver" parameterType="map">
+        update blog set is_solve='1' where BLOGID =#{blogid,jdbcType = VARCHAR}
+    </update>
+    <update id="delViewBack" parameterType="map">
+        update blog set state='1' where BLOGID =#{blogid,jdbcType = VARCHAR}
+    </update>
+    <!--查询是否具有点赞部分-->
+    <select id="queryAppraise" parameterType="map" resultMap="BaseResultMap">
+    select a.*
+    from BLOG_APPRAISE a
+    where a.blogid = #{blogid,jdbcType = VARCHAR} and a.userid = #{login_user_id,jdbcType = VARCHAR}
+    </select>
+    <!--查询是否具有点赞部分-->
+    <update id="updataAppraise" parameterType="map" >
+    update BLOG_APPRAISE
+    set APPRAISE=#{Appraise,jdbcType = VARCHAR}
+    where BLOGID =#{blogid,jdbcType = VARCHAR} and USERID =#{login_user_id}
+    </update>
+    <!--插入点赞部分-->
+    <insert id="addAppraise" parameterType="map">
+        insert into BLOG_APPRAISE
+        (
+        BLOGID,
+        USERID,
+        APPRAISE,
+        APPRAISETIME
+        )
+        values
+        (
+        #{blogid},
+        #{login_user_id},
+        #{Appraise},
+        sysdate
+        )
+    </insert>
+
+</mapper>

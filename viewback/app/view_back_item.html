@@ -1,0 +1,49 @@
+<!--
+      @author wangzilong
+      @date 2019/11/15 20:41
+-->
+
+<ion-view title="意见反馈详情">
+    <ion-nav-buttons side="right">
+        <button class="button" ng-click="managePower()">管理反馈</button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="view_back_item_title shengluehao">
+            {{viewBackitemdata.title}}
+        </div>
+        <div class="view_back_item_massage">
+            <div class="view_back_item_massage_sig">
+                {{viewBackitemdata.type}}
+            </div>
+            <div class="view_back_item_massage_name">
+                {{viewBackitemdata.user_name}}
+            </div>
+            <div class="view_back_item_massage_title">
+                <a>{{viewBackitemdata.crtTimeStr}}</a>
+            </div>
+        </div>
+        <div class="view_back_item_content">
+            {{viewBackitemdata.content}}
+        </div>
+        <div class="view_back_item_support" ng-click="addAppraise()">
+            <div id="viewbacksupport">
+                <i class="icon ion-thumbsup"></i>支持一下
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+<script id="m-view-back.html" type="text/ng-template">
+    <div class="viewBackManage">
+        <ion-list ng-show="viewBackitemdata.power == 'true'">
+            <ion-item ng-show="viewBackitemdata.type == '待审核'" ng-click="passAudit()">
+                <label>通过审核</label>
+            </ion-item>
+            <ion-item ng-show="viewBackitemdata.type == '未解决'" ng-click="passOver()">
+                <label>已解决</label>
+            </ion-item>
+            <ion-item ng-click="delViewBack()">
+                <label>删除反馈</label>
+            </ion-item>
+        </ion-list>
+    </div>
+</script>
