@@ -5,6 +5,11 @@
 angular.module("ViewBack",['ionic', 'myservices',"view_back_item","upLoadPicAndPreview"])
     .controller('viewBackCtrl', function ($rootScope, $scope, $state,$ionicModal, HttpUtil ,$timeout,MyDialog,$ionicPopup,upLoadPicAndPreview) {
         console.log("意见反馈页面进入");
+        //提交储存图片部分
+        $scope.imgList = [];
+        //记录星星的满意数量
+        $scope.startnum = 10;
+
         $scope.viewbacksearch = "";
         //获取全部的数据
         $scope.reallydata = [];
@@ -236,6 +241,8 @@ angular.module("ViewBack",['ionic', 'myservices',"view_back_item","upLoadPicAndP
 
         //用户添加新增问题反馈
         $scope.addViewBack = function () {
+            starRating();
+
             console.log("提交按钮被点击");
             console.log($scope.modalparams.title);
             console.log($scope.modalparams.content);
@@ -244,8 +251,13 @@ angular.module("ViewBack",['ionic', 'myservices',"view_back_item","upLoadPicAndP
             activitInfo.viewBackTitle =  $scope.modalparams.title;
             activitInfo.viewBackContent = $scope.modalparams.content;
             activitInfo.viewBackPhone = $scope.modalparams.phone;
+            activitInfo.viewBackstartnum =  $scope.startnum;
             console.log(activitInfo);
 
+            //用自定义的组件收集图片信息
+            $scope.imgList = upLoadPicAndPreview.CollectImg("viewback");
+            console.log($scope.imgList.length);
+            activitInfo.imageData = JSON.stringify($scope.imgList);
             if((activitInfo.viewBackTitle == "" || activitInfo.viewBackContent == "") || activitInfo.viewBackPhone == ""){
                 MyDialog.alert("标题、内容、联系方式为必填项");
                 return false;
@@ -391,11 +403,38 @@ angular.module("ViewBack",['ionic', 'myservices',"view_back_item","upLoadPicAndP
             document.head.appendChild(new_element);
             //console.log(document.head)*/
         };
+
+
         $scope.$on('$locationChangeStart', function(event, next, current) {
             //expression
             console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             $scope.doRefresh();
         });
+        function starRating() {
+            //console.log($('.star-rating'));
+            var start = document.getElementsByClassName("star-rating");
+            //console.log(start);
+            //console.log(start[0]);
+            console.log(start[0].childNodes);
 
+            for(var i=1;i<=start[0].childNodes.length;i+=2){
+                console.log(start[0].childNodes[i]);
+                console.log(i);
+                if (i < start[0].childNodes.length){
+                    var l = start[0].childNodes[i].checked;
+                }
+                //console.log(l);
+                if (l == true){
+                    $scope.startnum = 11-i;
+                    if($scope.startnum == 0){
+                        $scope.startnum = 2;
+                    }
+                    console.log($scope.startnum);
+                }
+
+            }
+
+
+        }
 
     });

@@ -8,6 +8,18 @@ import java.util.Date;
 public class MstSubdisViewback implements Serializable {
 
 
+
+    private Long collectId;
+    private String viewBackstartnum;
+
+    private String countnum;
+
+    private String appraise;
+
+
+
+    private String dateline;
+
     private String is_solve;
 
     private String is_audit;
@@ -36,6 +48,47 @@ public class MstSubdisViewback implements Serializable {
 
 
     private String crtTimeStr;
+
+    public Long getCollectId() {
+        return collectId;
+    }
+
+    public void setCollectId(Long collectId) {
+        this.collectId = collectId;
+    }
+
+    public String getViewBackstartnum() {
+        return viewBackstartnum;
+    }
+
+    public void setViewBackstartnum(String viewBackstartnum) {
+        this.viewBackstartnum = viewBackstartnum;
+    }
+
+    public String getCountnum() {
+        return countnum;
+    }
+
+    public void setCountnum(String countnum) {
+        this.countnum = countnum;
+    }
+
+
+    public String getAppraise() {
+        return appraise;
+    }
+
+    public void setAppraise(String appraise) {
+        this.appraise = appraise;
+    }
+
+    public String getDateline() {
+        return dateline;
+    }
+
+    public void setDateline(String dateline) {
+        this.dateline = dateline;
+    }
 
     public Long getBlogid() {
         return blogid;

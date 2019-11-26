@@ -23,7 +23,10 @@
             </div>
         </div>
         <div class="view_back_item_content">
-            {{viewBackitemdata.content}}
+        {{viewBackitemdata.content}}
+        </div>
+        <div class="box" ng-repeat="img in imgList">
+            <img style="width: 100%;" ng-src="{{img.fileUrl}}"/>
         </div>
         <div class="view_back_item_support" ng-click="addAppraise()">
             <div id="viewbacksupport">

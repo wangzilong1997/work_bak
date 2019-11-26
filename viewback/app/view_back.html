@@ -20,7 +20,8 @@
         <button class="button" ng-click="openViewBack()">反馈问题</button>
     </ion-nav-buttons>
     <ion-nav-title>
-        <div style="width: 70%;margin: .2rem auto;">
+        <div style="width: 70%;margin: .4rem auto;">
+            <!--兼容性有很大问题5s屏会隐藏一部分待解决-->
             <input id="viewer"
                    ng-model="viewbacksearch"
                    type="text"
@@ -68,7 +69,7 @@
                                 {{msg.crtTimeStr}}
                             </div>
                             <div class="viewBackListItemFooterSupport shengluehao">
-                                <a>{{msg.user_count}}</a>个支持
+                                <a>{{msg.countnum}}</a>个支持
                             </div>
                         </div>
                     </div>
@@ -96,7 +97,7 @@
                             {{msg.crtTimeStr}}
                         </div>
                         <div class="viewBackListItemFooterSupport shengluehao">
-                            <a>{{msg.user_count}}</a>个支持
+                            <a>{{msg.countnum}}</a>个支持
                         </div>
                     </div>
                 </div>
@@ -124,7 +125,7 @@
                             {{msg.crtTimeStr}}
                         </div>
                         <div class="viewBackListItemFooterSupport shengluehao">
-                            <a>{{msg.user_count}}</a>个支持
+                            <a>{{msg.countnum}}</a>个支持
                         </div>
                     </div>
                 </div>
@@ -181,57 +182,13 @@
                     <div style="margin-bottom: .5rem;">
                         问题评价
                     </div>
-                    <div>
-                        <div class="list">
-                            <label class="item item-radio">
-                                <input type="radio" name="group" value="Vwell" checked="checked">
-                                <div class="radio-content">
-                                    <div class="item-content">
-                                        非常满意
-                                    </div>
-                                    <i class="radio-icon ion-checkmark"></i>
-                                </div>
-                            </label>
-
-                            <label class="item item-radio">
-                                <input type="radio" name="group" value="well">
-                                <div class="radio-content">
-                                    <div class="item-content">
-                                        满意
-                                    </div>
-                                    <i class="radio-icon ion-checkmark"></i>
-                                </div>
-                            </label>
-
-                            <label class="item item-radio">
-                                <input type="radio" name="group" value="dally">
-                                <div class="radio-content">
-                                    <div class="item-content">
-                                        一般
-                                    </div>
-                                    <i class="radio-icon ion-checkmark"></i>
-                                </div>
-                            </label>
-
-                            <label class="item item-radio">
-                                <input type="radio" name="group" value="bad">
-                                <div class="radio-content">
-                                    <div class="item-content">
-                                        不满意
-                                    </div>
-                                    <i class="radio-icon ion-checkmark"></i>
-                                </div>
-                            </label>
-
-                            <label class="item item-radio">
-                                <input type="radio" name="group" value="terrible" >
-                                <div class="radio-content">
-                                    <div class="item-content">
-                                        很不满意
-                                    </div>
-                                    <i class="radio-icon ion-checkmark"></i>
-                                </div>
-                            </label>
+                    <div class="divcenter">
+                        <div class="star-rating">
+                            <input type="radio" name="rate">
+                            <input type="radio" name="rate">
+                            <input type="radio" name="rate">
+                            <input type="radio" name="rate">
+                            <input type="radio" name="rate">
                         </div>
                     </div>
                 </ion-item>

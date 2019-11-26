@@ -6,11 +6,50 @@
 angular.module("view_back_item",['ionic', 'myservices'])
         .controller("view_back_item_ctrl",function ($stateParams,$rootScope, $scope,$ionicModal, MyDialog, $ionicPopup, HttpUtil,$state) {
             console.log("view_back_item_ctrl 页面进入");
+            $scope.IMG_FILE = GConfig.IMG_FILE;
+            //初始化图片数组
+            $scope.imgList = [];
             console.log($stateParams.msg);
             $scope.viewBackitemdata = [];
             $scope.viewBackitemdata =JSON.parse($stateParams.msg);
+            console.log($scope.viewBackitemdata.blogid);
+            function lookLookAppraise (){
+                let auditdata = {};
+                auditdata.blogid = $scope.viewBackitemdata.blogid;
+                HttpUtil.ajax2({
+                    url: '/ViewBack/lookLookAppraise',
+                    data:auditdata,
+                    success: function (data) {
+                        console.log("成功",data);
+                        console.log(data.appraise);
+                        $scope.Appraised = data.appraise;
 
-            $scope.Appraised = "0";
+                    },
+                    error:function (res) {
+                        console.log("错误",res)
+                    }
+                }).then(
+                    () => {
+                        viewbacksupport();
+                        console.log("调用结束");
+                    }
+                );
+            }
+            lookLookAppraise ();
+
+            function viewbacksupport(){
+                let viewbacksupport = document.getElementsByClassName("view_back_item_support");
+                if ($scope.Appraised == "1"){
+                    viewbacksupport[0].style.background = "#0c60ee";
+                    viewbacksupport[0].childNodes[1].childNodes[2].textContent = "已支持";
+                    console.log(viewbacksupport[0].childNodes[1].childNodes[2].textContent);
+                }else {
+                    viewbacksupport[0].style.background = "#ffffff";
+                    viewbacksupport[0].childNodes[1].childNodes[2].textContent = "支持一下";
+                    console.log(viewbacksupport[0].childNodes[1].childNodes[2].textContent);
+                }
+            }
+
 
 
 
@@ -227,22 +266,32 @@ angular.module("view_back_item",['ionic', 'myservices'])
                         }).then(
                             () => {
                                 console.log("调用结束");
-                                let viewbacksupport = document.getElementsByClassName("view_back_item_support");
-                                if ($scope.Appraised == "1"){
-
-                                    viewbacksupport[0].style.background = "#0c60ee";
-                                    viewbacksupport[0].childNodes[1].childNodes[2].textContent = "已支持";
-                                    console.log(viewbacksupport[0].childNodes[1].childNodes[2].textContent);
-                                }else {
-                                    viewbacksupport[0].style.background = "#ffffff";
-                                    viewbacksupport[0].childNodes[1].childNodes[2].textContent = "支持一下";
-                                    console.log(viewbacksupport[0].childNodes[1].childNodes[2].textContent);
-                                }
-
+                                viewbacksupport();
                             }
                         );
                     }
                 })
+            };
+            getImgLists();
+            function getImgLists() {
+                var objInfo = {objType: "viewback", objId: $scope.viewBackitemdata.blogid};
+                HttpUtil.ajax2({
+                    url: '/commfile/list',
+                    data: objInfo,
+                    success: function (data) {
+                        $scope.$apply(function () {
+                            $scope.imgList = [];
+                            $.each(data, function (i, o) {
+                                $scope.imgList.push({fileUrl: $scope.IMG_FILE + "/" + o.FILE_URL, fileId: o.FILE_ID});
+                            });
+                        })
+                    }
+                }).then(
+                    () =>{
+                        console.log($scope.imgList);
+                    }
+                );
+
             }
 
         });

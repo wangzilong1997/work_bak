@@ -117,6 +117,24 @@ angular.module("upLoadPicAndPreview",['ionic', 'myservices'])
 
 
                 })
+            },
+            CollectImg:function (viewback) {
+                console.log('collectImg执行');
+                var imgList = [];
+                let input_imgs = document.getElementById("input_imgs");
+                console.log(input_imgs.childNodes.length);
+                for(var i = 0;i < input_imgs.childNodes.length; i++ ){
+                    console.log(input_imgs.childNodes[i].childNodes[0]);
+                    var imgInfo = {};
+                    console.log("iput_imgschildnodes",input_imgs.childNodes[i].childNodes[0]);
+                    imgInfo.fileName = input_imgs.childNodes[i].childNodes[0].name;
+                    imgInfo.fileSize = 0;
+                    imgInfo.fileUrl = input_imgs.childNodes[i].childNodes[0].id;
+                    imgInfo.objType = viewback;
+                    imgList.push(imgInfo);
+                    console.log(imgList);
+                }
+                return imgList
             }
         }
     });
