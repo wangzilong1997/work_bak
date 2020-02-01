@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src * data: cdvfile: gap:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+
+    <title>营销沙盘</title>
+    <!-- 全局样式 -->
+    <link rel="stylesheet" href="lib/zteui/reset.css"/>
+    <link rel="stylesheet" href="lib/zteui/fonts/iconfont.css"/>
+    <link rel="stylesheet" href="lib/zteui/base.css"/>
+    <!-- ionic样式 -->
+    <link rel="stylesheet" href="lib/ionic/css/ionic.min.css"/>
+    <!-- 新app样式 -->
+    <link rel="stylesheet" href="lib/zteui/components.css"/>
+    <link rel="stylesheet" href="lib/zteui/case.css"/>
+    <link rel="stylesheet" href="lib/zteui/list.css"/>
+    <link rel="stylesheet" href="lib/zteui/login.css"/>
+    <link rel="stylesheet" href="css/new-login.css"/>
+    <!--新任务工单界面-->
+    <link href="css/task.css" rel="stylesheet">
+    <!-- 工单执行情况（任务）样式 -->
+    <link rel="stylesheet" href="lib/zteui/workorder-style.css">
+    <!-- 原app样式 -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/cust_list.css" rel="stylesheet">
+    <link href="css/cust_info.css" rel="stylesheet">
+    <link href="css/stat_info.css" rel="stylesheet">
+    <link href="css/collect_room.css" rel="stylesheet">
+    <link href="css/portrait.css" rel="stylesheet">
+    <link href="css/guest_view.css" rel="stylesheet">
+    <link href="css/activity_info.css" rel="stylesheet">
+    <!--自定义图标-->
+    <link rel="stylesheet" href="css/icommon.css"/>
+    <!-- ionic framework -->
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+    <script src="lib/ionic-datepicker/ionic-datepicker.bundle.min.js"></script>
+    <script src="lib/ionic-timepicker/dist/ionic-timepicker.bundle.min.js"></script>
+    <!-- cordova framework -->
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script type="text/javascript">
+        var scriptNode = document.createElement("script");
+        var scriptNode1 = document.createElement("script");
+        scriptNode.setAttribute("type", "text/javascript");
+        scriptNode1.setAttribute("type", "text/javascript");
+
+        var str = location.href;
+        var isToken = str.indexOf("token");
+
+        if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {  //判断iPhone|iPad|iPod|iOS
+            scriptNode.setAttribute("src", "lib/ios/cordova.js");
+        } else if (/(Android)/i.test(navigator.userAgent) && isToken==-1) {   //判断Android
+            scriptNode.setAttribute("src", "lib/android/cordova.js");
+        } else {  //pc
+            // alert('pc');
+        };
+        document.head.appendChild(scriptNode);
+        document.head.appendChild(scriptNode1);
+        function loadBmpScript() {
+            let script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src = "http://api.map.baidu.com/api?v=2.0&ak=Gpw62vwjXig7TZWFxw24bFPcIcP6zEwr&callback=initialize";
+            document.head.appendChild(script);
+        }
+        window.onload = loadBmpScript;
+    </script>
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/pako.js" charset="utf-8"></script>
+    <script src="lib/arcgis/3.29compact/init.js"></script>
+    <script src="lib/qrcode.js"></script>
+    <script src="lib/md5.min.js"></script>
+
+    <script src="js/config.js"></script>
+    <script src="js/app.js?v=Math.random()"></script>
+    <script src="js/app_util.js?v=Math.random()"></script>
+    <script src="js/services.js"></script>
+    <!--登录-->
+    <script src="js/ctrl_comm_info.js?v=Math.random()"></script>
+    <!--消息-->
+    <script src="js/ctrl_msg_list.js"></script>
+    <!--app分享-->
+    <script src="js/ctrl_share.js?v=Math.random()"></script>
+    <!--用户管理-->
+    <script src="js/ctrl_user_info.js"></script>
+    <!--小区责任人管理-->
+    <script src="js/ctrl_village_pic.js"></script>
+    <!--各级画像-->
+    <script src="js/ctrl_portrait.js?v=Math.random()"></script>
+    <!--各级视图-->
+    <script src="js/ctrl_village_list.js?v=Math.random()"></script>
+    <!--小区信息（住户列表）-->
+    <script src="js/ctrl_cust_list.js?v=Math.random()"></script>
+    <!--渠道用户（单C）-->
+    <script src="js/ctrl_cdma_list.js?v=Math.random()"></script>
+    <!--住户信息-->
+    <script src="js/ctrl_cust_info.js?v=Math.random()"></script>
+    <!--单C信息-->
+    <script src="js/ctrl_cdma_info.js?v=Math.random()"></script>
+    <!--房间信息收集：它网住户-->
+    <script src="js/ctrl_collect_room.js?v=Math.random()"></script>
+    <!--楼栋信息收集-->
+    <script src="js/ctrl_collect_build.js?v=Math.random()"></script>
+    <!--经典案例-->
+    <script src="components/classiccase/ctrl_case.js?v=Math.random()"></script>
+    <!--单独筛选住户：区域、场景、高级-->
+    <script src="components/qrycond/qry-cust-cond.js?v=Math.random()"></script>
+    <!--小区筛选住户：场景、楼栋、高级-->
+    <script src="components/qrycond/qry-cust-cond-village.js"></script>
+    <!--单C用户筛选-->
+    <script src="components/qrycond/qry-cust-cond-cdma.js"></script>
+    <script src="js/ctrl_dev.js"></script>
+    <!--工单执行情况(我的场景任务)-->
+    <script src="components/job/scene-task-list.js?v=Math.random()"></script>
+    <!--预拆机工单-->
+    <script src="components/job/pre_order.js"></script>
+    <script src="components/job/pre_collect_questions.js"></script>
+    <link rel="stylesheet" href="components/job/pre_order.css">
+    <!--手势登录-->
+    <script src="components/h5lock/Handlock.js"></script>
+    <!--系统管理-->
+    <script src="components/sys/sys-module.js"></script>
+    <!--百度地图-->
+    <script src="components/bmap/bmap-module.js"></script>
+
+    <!--政企商客-->
+    <script src="components/enterprise/guest_view.js"></script>
+    <!--片区视图-->
+    <script src="components/district/district_view.js"></script>
+    <!--维护网格-->
+    <script src="components/district/vindicate_grid_view.js"></script>
+    <!--服务画像-->
+    <!--<script src="components/servicieportrayal/servicie_portrayal.js"></script>-->
+    <!--社区视图-->
+    <script src="components/commounity/commounity_view.js"></script>
+    <!--家庭圈成员信息-->
+    <script src="js/ctrl_homecircle_info.js"></script>
+    <!--住户画像-套餐信息-->
+    <script src="components/package/package.js?v=Math.random()"></script>
+    <!--住户画像-套餐使用-->
+    <script src="components/package/package_use.js?v=Math.random()"></script>
+    <script src="js/crt_activity_mgr.js?v=Math.random()"></script>
+    <!--促销政策-->
+    <script src="components/package/promotion_activity.js?v=Math.random()"></script>
+    <!--新任务界面-->
+    <script src="components/job/employee-track-order.js?v=Math.random()"></script>
+    <script src="components/job/employee-track-distribution.js?v=Math.random()"></script>
+    <script src="components/job/employee-track-list.js?v=Math.random()"></script>
+    <script src="components/job/my-track-redeploy.js?v=Math.random()"></script>
+    <script src="components/job/order-redeploy.js?v=Math.random()"></script>
+    <script src="components/job/order-track.js?v=Math.random()"></script>
+    <script src="components/job/employee-track-statistics.js?v=Math.random()"></script>
+    <!-- 地图页面 -->
+    <script src="components/gismap/warn-gis-map.js?v=Math.random()"></script>
+    <script src="components/gismap/gis-map-collect.js?v=Math.random()"></script>
+    <!-- 小区宣传反馈进展 -->
+    <script src="components/feedback/feedback_list.js?v=Math.random()"></script>
+    <!-- 竞争信息收集 -->
+    <script src="components/compete/compete_list.js?v=Math.random()"></script>
+    <!--忘记密码-->
+    <script src="js/forgetpwd.js?v=Math.random()"></script>
+    <!--我的-意见反馈-->
+    <script src="components/viewback/view_back.js?v=Math.random()"></script>
+    <!--意见反馈详情-->
+    <script src="components/viewback/view_back_item.js?v=Math.random()"></script>
+    <!--上传图片组件-->
+    <script src="components/common/upLoadPicAndPreview.js"></script>
+    <!--图片信息查询组件-->
+    <script src="components/common/exif.js"></script>
+</head>
+<!--class="platform-ios platform-cordova platform-webview"-->
+<body ng-app="village" >
+
+<ion-nav-bar class="bar-positive">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+</ion-nav-bar>
+
+<ion-nav-view></ion-nav-view>
+</body>
+</html>

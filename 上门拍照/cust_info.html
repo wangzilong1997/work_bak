@@ -1,0 +1,22 @@
+
+
+<!--拍照模态窗口-->
+<script id="godoorphoto.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive">
+            <h1 class="title">拍照上传</h1>
+            <button class="button button-clear button-primary" ng-click="closegodoorphotoModel()">关闭</button>
+            <button class="button button-clear button-primary" ng-click="closegodoorphotoModel()">确定</button>
+        </ion-header-bar>
+        <ion-content>
+            <div style="margin-top: 2rem;text-align:center" ng-click="takephoto()">
+                <div style="">点击拍照</div>
+                <div style="font-size: 35px;color: aqua;">
+                    <i class="icon ion-camera"></i></div>
+            </div>
+            <div style="display: flex;align-items: center;justify-content: center;">
+                <canvas id="myImage" width="400px" height="600px"></canvas>
+            </div>
+        </ion-content>
+    </ion-modal-view>
+</script>
